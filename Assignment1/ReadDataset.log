@@ -1,0 +1,168 @@
+Preparing Test and Train data for : breast_cancer
+      0      1      2       3        4        5       6        7       8   \
+0  17.99  10.38  122.8  1001.0  0.11840  0.27760  0.3001  0.14710  0.2419   
+1  20.57  17.77  132.9  1326.0  0.08474  0.07864  0.0869  0.07017  0.1812   
+2  19.69  21.25  130.0  1203.0  0.10960  0.15990  0.1974  0.12790  0.2069   
+
+        9  ...     21     22      23      24      25      26      27      28  \
+0  0.07871 ...  17.33  184.6  2019.0  0.1622  0.6656  0.7119  0.2654  0.4601   
+1  0.05667 ...  23.41  158.8  1956.0  0.1238  0.1866  0.2416  0.1860  0.2750   
+2  0.05999 ...  25.53  152.5  1709.0  0.1444  0.4245  0.4504  0.2430  0.3613   
+
+        29  30  
+0  0.11890 NaN  
+1  0.08902 NaN  
+2  0.08758 NaN  
+
+[3 rows x 31 columns]
+Preparing Test and Train data for : climate
+Preparing Test and Train data for : breast_cancer
+      0      1      2       3        4        5       6        7       8   \
+0  17.99  10.38  122.8  1001.0  0.11840  0.27760  0.3001  0.14710  0.2419   
+1  20.57  17.77  132.9  1326.0  0.08474  0.07864  0.0869  0.07017  0.1812   
+2  19.69  21.25  130.0  1203.0  0.10960  0.15990  0.1974  0.12790  0.2069   
+
+        9  ...     21     22      23      24      25      26      27      28  \
+0  0.07871 ...  17.33  184.6  2019.0  0.1622  0.6656  0.7119  0.2654  0.4601   
+1  0.05667 ...  23.41  158.8  1956.0  0.1238  0.1866  0.2416  0.1860  0.2750   
+2  0.05999 ...  25.53  152.5  1709.0  0.1444  0.4245  0.4504  0.2430  0.3613   
+
+        29  30  
+0  0.11890 NaN  
+1  0.08902 NaN  
+2  0.08758 NaN  
+
+[3 rows x 31 columns]
+Preparing Test and Train data for : hill_valley
+          0           1           2           3           4           5    \
+0  1317.26579  1315.22095  1312.77058  1309.83425  1306.31559  1302.09910   
+1  7329.96762  7379.90744  7441.79923  7518.50342  7613.56503  7731.37749   
+2   809.42141   809.78012   810.20719   810.71565   811.32102   812.04175   
+
+          6           7           8           9   ...          91   \
+0  1297.04640  1290.99165  1283.73611  1275.04165 ...   1327.57511   
+1  7877.38571  8058.33769  8282.59646  8560.52650 ...   7121.30047   
+2   812.89983   813.92145   815.13777   816.58589 ...    807.54513   
+
+          92          93          94          95          96          97   \
+0  1327.57535  1327.57555  1327.57572  1327.57586  1327.57598  1327.57607   
+1  7121.30044  7121.30041  7121.30039  7121.30037  7121.30035  7121.30034   
+2   807.54418   807.54338   807.54271   807.54214   807.54167   807.54127   
+
+          98          99   100  
+0  1327.57615  1327.57622  NaN  
+1  7121.30033  7121.30032  NaN  
+2   807.54094   807.54066  NaN  
+
+[3 rows x 101 columns]
+Preparing Test and Train data for : ionosphere
+   0   1        2        3        4        5        6        7        8   \
+0   1   0  0.99539 -0.05889  0.85243  0.02306  0.83398 -0.37708  1.00000   
+1   1   0  1.00000 -0.18829  0.93035 -0.36156 -0.10868 -0.93597  1.00000   
+2   1   0  1.00000 -0.03365  1.00000  0.00485  1.00000 -0.12062  0.88965   
+
+        9  ...       25       26       27       28       29       30       31  \
+0  0.03760 ... -0.51171  0.41078 -0.46168  0.21266 -0.34090  0.42267 -0.54487   
+1 -0.04549 ... -0.26569 -0.20468 -0.18401 -0.19040 -0.11593 -0.16626 -0.06288   
+2  0.01198 ... -0.40220  0.58984 -0.22145  0.43100 -0.17365  0.60436 -0.24180   
+
+        32       33  34  
+0  0.18641 -0.45300 NaN  
+1 -0.13738 -0.02447 NaN  
+2  0.56045 -0.38238 NaN  
+
+[3 rows x 35 columns]
+Preparing Test and Train data for : micromass
+   0     1     2     3     4           5     6     7     8     9     ...   \
+0   0.0   0.0   0.0   0.0   0.0  2141495.75   0.0   0.0   0.0   0.0  ...    
+1   0.0   0.0   0.0   0.0   0.0        0.00   0.0   0.0   0.0   0.0  ...    
+2   0.0   0.0   0.0   0.0   0.0        0.00   0.0   0.0   0.0   0.0  ...    
+
+   1291           1292  1293  1294  1295  1296  1297  1298  1299  1300  
+0   0.0       0.000000   0.0   0.0   0.0   0.0     0   0.0   0.0   NaN  
+1   0.0  221987.484375   0.0   0.0   0.0   0.0     0   0.0   0.0   NaN  
+2   0.0   97468.265625   0.0   0.0   0.0   0.0     0   0.0   0.0   NaN  
+
+[3 rows x 1301 columns]
+Preparing Test and Train data for : qsar
+      0       1   2   3   4   5   6     7   8   9  ...  32  33  34     35  \
+0  3.919  2.6909   0   0   0   0   0  31.4   2   0 ...   0   0   0  2.949   
+1  4.170  2.1144   0   0   0   0   0  30.8   1   1 ...   0   0   0  3.315   
+2  3.932  3.2512   0   0   0   0   0  26.7   2   4 ...   0   0   1  3.076   
+
+      36  37     38  39  40  41  
+0  1.591   0  7.253   0   0 NaN  
+1  1.967   0  7.257   0   0 NaN  
+2  2.417   0  7.601   0   0 NaN  
+
+[3 rows x 42 columns]
+Preparing Test and Train data for : breast_cancer
+Preparing Test and Train data for : hill_valley
+Preparing Test and Train data for : ionosphere
+Preparing Test and Train data for : micromass
+Preparing Test and Train data for : qsar
+Preparing Test and Train data for : breast_cancer
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Preparing Test and Train data for : hill_valley
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Preparing Test and Train data for : ionosphere
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Preparing Test and Train data for : micromass
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Preparing Test and Train data for : qsar
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Preparing Test and Train data for : breast_cancer
+Preparing Test and Train data for : hill_valley
+Preparing Test and Train data for : ionosphere
+Preparing Test and Train data for : micromass
+Preparing Test and Train data for : qsar
+Preparing Test and Train data for : breast_cancer
+Preparing Test and Train data for : hill_valley
+Preparing Test and Train data for : ionosphere
+Preparing Test and Train data for : micromass
+Preparing Test and Train data for : qsar
