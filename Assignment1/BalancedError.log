@@ -1,0 +1,12 @@
+Working with dataset : breast_cancer
+Working with dataset : breast_cancer
+Working with dataset : breast_cancer
+Balanced error for dataset breast_cancer : 0.20
+Working with dataset : hill_valley
+Balanced error for dataset hill_valley : 0.10
+Working with dataset : ionosphere
+Balanced error for dataset ionosphere : 0.50
+Working with dataset : micromass
+Balanced error for dataset micromass : 0.50
+Working with dataset : qsar
+Balanced error for dataset qsar : 0.50
