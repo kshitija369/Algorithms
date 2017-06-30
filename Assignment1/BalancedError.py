@@ -55,14 +55,14 @@ def main(argv):
        if not dataset.startswith('.'):
            rootLogger.info("Working with dataset : %s", dataset)
            error = 0
-           for i in range(10):
+           for k in range(10):
                #Read test data
-               testdata = pandas.read_csv("{0}/Dataset/{1}/{1}.testdata.{2}.csv".format(path, dataset, i), sep = ',',  header=None, index_col=False)              
+               testdata = pandas.read_csv("{0}/Dataset/{1}/{1}.testdata.{2}.csv".format(path, dataset, k), sep = ',',  header=None, index_col=False)              
                lastcolidx = len(testdata.columns) - 1
                testlabels = list(testdata.loc[:, lastcolidx]) 
                
                #Read prediction data
-               preddata = pandas.read_csv("{0}/Dataset/{1}/{1}.preddata.{2}.csv".format(path, dataset, i), sep = ',',  header=None, index_col=False) 
+               preddata = pandas.read_csv("{0}/Dataset/{1}/{1}.preddata.{2}.csv".format(path, dataset, k), sep = ',',  header=None, index_col=False) 
                preddata = list(preddata[1])
                a=b=c=d=0
                
@@ -75,7 +75,15 @@ def main(argv):
                        c=c+1 
                    if(preddata[i] == 1 & testlabels[i] == 1): 
                        d=d+1 
-               error = error + 0.5*(b/(a+b) + c/(c+d))       
+                       
+               if( (a+b) == 0 and (c+d) == 0):
+                    print("failed")
+               elif( (a+b) == 0):
+                    error = error + 0.5*(c/(c+d)) 
+               elif( (c+d) == 0):
+                    error = error + 0.5*(b/(a+b)) 
+               else:
+                    error = error + 0.5*(b/(a+b) + c/(c+d))      
                
            error = error/10               
            rootLogger.info("Balanced error for dataset %s : %0.2f", dataset, error)
