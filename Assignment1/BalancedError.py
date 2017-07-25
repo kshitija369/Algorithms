@@ -1,93 +1,79 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 31 17:54:23 2017
+Created on Fri Jun  9 10:31:52 2017
 
 @author: kshitijap
 """
-import sys, getopt
-import os
-import logging
-import pandas
+import os, sys
 
-rootLogger = None
+path = sys.argv[1]
+#path = "/Users/kshitijap/Desktop/Summer17/ML_Assignments/"
 
-def main(argv):
-   
-   global rootLogger
-   path = ''
-   loglevel = ''
-   
-   rootLogger = logging.getLogger()
-   logfileName = 'BalancedError'
-   consoleHandler = logging.StreamHandler()  
-   rootLogger.addHandler(consoleHandler)   
-   try:
-      opts, args = getopt.getopt(argv,"hi:l:",["ifile=","log="])
-   except getopt.GetoptError:
-      rootLogger.info('BalancedError.py -i <datasetDir> -l <logLevel>')
-      sys.exit(2)
-   for opt, arg in opts:
-      if opt == '-h':
-         rootLogger.info('BalancedError.py -i <datasetDir> -l <logLevel>')
-         sys.exit()
-      elif opt in ("-i", "--ifile"):
-         path = arg
-         logPath = path
-      elif opt in ("-l", "--log"):
-         loglevel = arg
-         
-    
-   fileHandler = logging.FileHandler("{0}/{1}.log".format(logPath, logfileName))
-   rootLogger.addHandler(fileHandler)
-   # set user specified log level
-   numeric_level = getattr(logging, loglevel.upper(), None)
-   if not isinstance(numeric_level, int):
-       raise ValueError('Invalid log level: %s' % loglevel)
-   rootLogger.setLevel(numeric_level)
-   # set working dir as folder with datasets
-   os.chdir(path)
-    
-   # list all the files in the dataset folder
-   listDir = os.listdir("{0}/Dataset/".format(path))
-    
-   for dataset in listDir:
-       if not dataset.startswith('.'):
-           rootLogger.info("Working with dataset : %s", dataset)
-           error = 0
-           for k in range(10):
-               #Read test data
-               testdata = pandas.read_csv("{0}/Dataset/{1}/{1}.testdata.{2}.csv".format(path, dataset, k), sep = ',',  header=None, index_col=False)              
-               lastcolidx = len(testdata.columns) - 1
-               testlabels = list(testdata.loc[:, lastcolidx]) 
-               
-               #Read prediction data
-               preddata = pandas.read_csv("{0}/Dataset/{1}/{1}.preddata.{2}.csv".format(path, dataset, k), sep = ',',  header=None, index_col=False) 
-               preddata = list(preddata[1])
-               a=b=c=d=0
-               
-               for i in range(len(preddata)):
-                   if(preddata[i] == 0 & testlabels[i] == 0): 
+# list all the files in the dataset folder
+listDir = os.listdir("{0}/Dataset/".format(path))
+
+for dataset in listDir:
+    if not dataset.startswith('.'):
+        print("Working with dataset : ", dataset)
+        #####Read labels#####
+        labelfile = "{0}/Dataset/{1}/{1}.labels".format(path, dataset)
+        f = open(labelfile)
+        data = {}
+        i = 0
+        l = f.readline()
+        
+        while(l != ''):
+            a = l.split()
+            data[int(a[1])] = int(a[0])
+            l = f.readline()
+            
+        rows = len(data)
+        f.close()
+        
+        error = 0
+        for k in range(0, 10, 1):       
+            #####Read predictions#####
+            predfile = "{0}/Dataset/{1}/{1}.pred.{2}".format(path, dataset, k)
+            f = open(predfile)
+            predlabels = {}
+            n = []
+            n.append(0)
+            n.append(0)
+            l = f.readline()
+            
+            while(l != ''):
+                a = l.split()
+                predlabels[int(a[1])] = int(a[0])
+                l = f.readline()
+                n[int(a[0])] += 1
+            f.close()
+            
+            #####Compute balanced error#####   
+            a=b=c=d=0
+            for i in range(0, rows, 1):
+                if( predlabels.get(i) != None and data.get(i) != None):
+                   if(predlabels.get(i) == 0 and data.get(i) == 0): 
                        a=a+1 
-                   if(preddata[i] == 0 & testlabels[i] == 1): 
+                   if(predlabels.get(i) == 0 and data.get(i) == 1): 
                        b=b+1 
-                   if(preddata[i] == 1 & testlabels[i] == 0): 
+                   if(predlabels.get(i) == 1 and data.get(i) == 0): 
                        c=c+1 
-                   if(preddata[i] == 1 & testlabels[i] == 1): 
+                   if(predlabels.get(i) == 1 and data.get(i) == 1): 
                        d=d+1 
-                       
-               if( (a+b) == 0 and (c+d) == 0):
-                    print("failed")
-               elif( (a+b) == 0):
-                    error = error + 0.5*(c/(c+d)) 
-               elif( (c+d) == 0):
-                    error = error + 0.5*(b/(a+b)) 
-               else:
-                    error = error + 0.5*(b/(a+b) + c/(c+d))      
+            if( (a+b) == 0 and (c+d) == 0):
+                print("failed")
+            elif( (a+b) == 0):
+                error = error + 0.5*(c/(c+d)) 
+            elif( (c+d) == 0):
+                error = error + 0.5*(b/(a+b)) 
+            else:
+                error = error + 0.5*(b/(a+b) + c/(c+d))
                
-           error = error/10               
-           rootLogger.info("Balanced error for dataset %s : %0.2f", dataset, error)
-               
-if __name__ == "__main__":
-   main(sys.argv[1:])               
-               
+        error = round((error/10),2)
+        print("Balanced error for dataset {0} : {1}".format(dataset, error))
+           
+            
+            
+            
+

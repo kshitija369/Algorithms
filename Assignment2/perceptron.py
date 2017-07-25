@@ -8,6 +8,7 @@ Created on Wed Jun 21 16:29:50 2017
 
 import sys
 import random
+import math
 
 datafile = sys.argv[1]
 labelfile = sys.argv[2]
@@ -27,6 +28,7 @@ while(l != ''):
     l2 = []
     for j in range(0, len(a), 1):
         l2.append(float(a[j]))
+    l2.append(1)
     data.append(l2)
     l = f.readline()
     
@@ -53,9 +55,9 @@ w = []
 #####Initialize w #####
 for j in range(0, cols, 1):
     w.append(.02 * random.random() - .01)
-    
+
 #####Gradiant descend constants #####
-eta = .001
+eta = .0000001
 stop =  .0001
 
 ##### Function dot product #####
@@ -64,51 +66,63 @@ def dot_product(w_, data_i ):
     for j in range(0, cols, 1):
         dp += w_[j] * data_i[j]
     return(dp);
-
-old_w = []
+ 
+dellf = []
 for j in range(0, cols, 1):
-    old_w.append(0)
+        dellf.append(0)
+
+old_dellf = []
+for j in range(0, cols, 1):
+    old_dellf.append(0)        
+        
 while True:
-    ##### Find dellf #####
-    dellf = []
     flag = False
     for j in range(0, cols, 1):
-        dellf.append(0)
+        old_dellf[j] = dellf[j]
     
+    for j in range(0, cols, 1):
+        dellf[j] = 0
+
+    normw = 0
+    for j in range(0, cols-1, 1):
+        normw += w[j]**2 
+    ##### Find dellf #####    
     for i in range(0, rows, 1):
-         y = dot_product(w,data[i])
-         for j in range(0, cols, 1):
-             dellf[j] += (trainlabels[i] - y) * data[i][j]
+        if(trainlabels.get(i) != None):          
+            y = dot_product(w,data[i])
+            for j in range(0, cols, 1):
+                dellf[j] += (trainlabels[i] - y) * data[i][j]
     
     ##### Update w #####
     for j in range(0, cols, 1):
-        old_w[j] =  w[j]
-        w[j] = w[j] + eta * dellf[j]
+        w[j] = w[j] + eta * dellf[j] 
         
     # Check for convergence
     for k in range(0, cols, 1):
-        if(abs(old_w[k] - w[k]) <= stop):
+        if(abs(old_dellf[k] - dellf[k]) < stop):
             flag = True
     if(flag == True):
-        break;    
-        
+        break;  
+                 
     ##### Calculate Error #####
     error = 0
     for i in range(0, rows, 1):
-        error += (trainlabels[i] - dot_product(w,data[i]))**2
-    
+        if(trainlabels.get(i) != None):    
+            error += (trainlabels[i] - dot_product(w,data[i]))**2
     print("error : ", error)
 
 print("w : ")
 normw = 0
-for j in range(0, cols, 1):
+for j in range(0, cols-1, 1):
     normw += w[j]**2 
+              
+for j in range(0, cols, 1):              
     print(w[j])
     
 print("\n")
-normw = (normw)**0.5
+normw = math.sqrt(normw)
 print("||w|| : ", normw)
-print("abs(w0/||w||) :", abs(w[0]/normw))
+print("abs(w0/||w||) :", abs(w[cols-1]/normw))
 
 
 
